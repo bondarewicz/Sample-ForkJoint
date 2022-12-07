@@ -60,14 +60,26 @@ Content-Type: application/json
   "burgers": [
     {
       "burgerId": "{{$guid}}",
-      "weight": 2,
+      "weight": 0.25,
+      "lettuce": false,
+      "cheese": false,
+      "pickle": false,
+      "onion": false,
+      "ketchup": false,
+      "mustard": false,
+      "barbecueSauce": true,
+      "onionRing": true
+    },
+    {
+      "burgerId": "{{$guid}}",
+      "weight": 0.25,
       "lettuce": false,
       "cheese": true,
-      "pickle": true,
-      "onion": true,
-      "ketchup": true,
+      "pickle": false,
+      "onion": false,
+      "ketchup": false,
       "mustard": true,
-      "barbecueSauce": true,
+      "barbecueSauce": false,
       "onionRing": true
     }
   ],
@@ -75,6 +87,10 @@ Content-Type: application/json
     {
       "fryId": "{{$guid}}",
       "size": 1
+    },
+    {
+      "fryId": "{{$guid}}",
+      "size": 2
     }
   ],
   "shakes": [
@@ -87,7 +103,60 @@ Content-Type: application/json
   "fryShakes": [
     {
       "fryShakeId": "{{$guid}}",
-      "flavor": "Banna",
+      "flavor": "Banana",
+      "size": 1
+    }
+  ]
+}
+```
+
+### Example SubmitOrder Failure Post
+```
+POST https://localhost:5001/Order
+Content-Type: application/json
+
+{
+  "orderId": "{{$guid}}",
+  "burgers": [
+    {
+      "burgerId": "{{$guid}}",
+      "weight": 0.25,
+      "lettuce": false,
+      "cheese": false,
+      "pickle": false,
+      "onion": false,
+      "ketchup": false,
+      "mustard": false,
+      "barbecueSauce": true,
+      "onionRing": true
+    },
+    {
+      "burgerId": "{{$guid}}",
+      "weight": 0.25,
+      "lettuce": true,
+      "cheese": true,
+      "pickle": false,
+      "onion": false,
+      "ketchup": false,
+      "mustard": true,
+      "barbecueSauce": false,
+      "onionRing": true
+    }
+  ],
+  "fries": [
+    {
+      "fryId": "{{$guid}}",
+      "size": 1
+    },
+    {
+      "fryId": "{{$guid}}",
+      "size": 2
+    }
+  ],
+  "shakes": [
+    {
+      "shakeId": "{{$guid}}",
+      "flavor": "Strawberry",
       "size": 1
     }
   ]
