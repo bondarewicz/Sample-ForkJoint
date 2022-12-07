@@ -12,6 +12,11 @@ The sample application can be run using Docker, however, there are a couple setu
 - Start all the services `docker compose -f .\docker-compose.services.yml up -d`
 - Stopping all the services `docker compose -f .\docker-compose.services.yml down -v`
 
+## Db Migrations
+
+- `cd src/ForkJoint.Api`
+- `dotnet ef database update`
+
 ### Certificate Setup
 
 The `docker-compose.api.yml` maps the local ASP.NET certificate folder into the container so that HTTPS can be used. This is different depending upon your operating system.

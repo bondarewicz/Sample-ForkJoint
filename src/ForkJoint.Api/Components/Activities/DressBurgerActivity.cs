@@ -40,7 +40,7 @@ public class DressBurgerActivity :
 
             _logger.LogDebug("Ordering Onion Ring: {OrderId}", onionRingId);
 
-            Response<OnionRingsCompleted> response = await _onionRingClient.GetResponse<OnionRingsCompleted>(new
+            await _onionRingClient.GetResponse<OnionRingsCompleted>(new
             {
                 arguments.OrderId,
                 OrderLineId = onionRingId,
