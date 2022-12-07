@@ -1,14 +1,12 @@
-using ForkJoint.Api.Services.Fryer;
-using ForkJoint.Contracts.Fry;
-
 namespace ForkJoint.Tests;
 
 using System;
 using System.Threading.Tasks;
 using Api.Components.Consumers;
 using Api.Components.Futures;
-using Api.Services;
-using Contracts;
+using Api.Services.Fryer;
+using Domain.Fry;
+using Domain;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;

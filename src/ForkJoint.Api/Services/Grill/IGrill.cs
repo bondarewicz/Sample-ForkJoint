@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using ForkJoint.Contracts.Burger;
+using ForkJoint.Domain.Burger;
 
 namespace ForkJoint.Api.Services.Grill;
 

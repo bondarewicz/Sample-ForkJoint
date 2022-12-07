@@ -1,14 +1,11 @@
-using ForkJoint.Api.Services.Grill;
-using ForkJoint.Contracts.Burger;
-
 namespace ForkJoint.Tests;
 
 using System.Threading.Tasks;
 using Api.Components.Activities;
 using Api.Components.Futures;
 using Api.Components.ItineraryPlanners;
-using Api.Services;
-using Contracts;
+using Api.Services.Grill;
+using Domain.Burger;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;

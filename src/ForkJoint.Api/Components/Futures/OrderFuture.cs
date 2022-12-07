@@ -2,12 +2,12 @@ namespace ForkJoint.Api.Components.Futures;
 
 using System.Linq;
 using MassTransit;
-using Contracts.Burger;
-using Contracts.Fry;
-using Contracts.FryShake;
-using Contracts.Order;
-using Contracts.OrderLine;
-using Contracts.Shake;
+using Domain.Burger;
+using Domain.Fry;
+using Domain.FryShake;
+using Domain.Order;
+using Domain.OrderLine;
+using Domain.Shake;
 
 public class OrderFuture :
     Future<SubmitOrder, OrderCompleted, OrderFaulted>

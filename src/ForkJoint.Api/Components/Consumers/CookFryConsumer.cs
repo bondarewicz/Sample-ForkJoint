@@ -1,7 +1,7 @@
 namespace ForkJoint.Api.Components.Consumers;
 
 using Services.Fryer;
-using Contracts.Fry;
+using Domain.Fry;
 using System.Threading.Tasks;
 using MassTransit;
 

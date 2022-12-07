@@ -1,10 +1,3 @@
-using ForkJoint.Api.Services.Fryer;
-using ForkJoint.Api.Services.Grill;
-using ForkJoint.Contracts.Burger;
-using ForkJoint.Contracts.FryShake;
-using ForkJoint.Contracts.Order;
-using ForkJoint.Contracts.Shake;
-
 namespace ForkJoint.Tests;
 
 using System.Threading.Tasks;
@@ -12,8 +5,13 @@ using Api.Components.Activities;
 using Api.Components.Consumers;
 using Api.Components.Futures;
 using Api.Components.ItineraryPlanners;
-using Api.Services;
-using Contracts;
+using Api.Services.Fryer;
+using Api.Services.Grill;
+using Domain.Burger;
+using Domain.FryShake;
+using Domain.Order;
+using Domain.Shake;
+using Domain;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;

@@ -3,7 +3,7 @@ namespace ForkJoint.Api.Components.Consumers;
 using System.Threading.Tasks;
 using MassTransit;
 using Services.Fryer;
-using Contracts.OnionRings;
+using Domain.OnionRings;
 
 public class CookOnionRingsConsumer :
     IConsumer<CookOnionRings>

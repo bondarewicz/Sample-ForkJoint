@@ -1,11 +1,11 @@
 namespace ForkJoint.Api.Components.Futures;
 
 using System.Linq;
-using Contracts;
+using Domain;
 using MassTransit;
-using Contracts.Fry;
-using Contracts.FryShake;
-using Contracts.Shake;
+using Domain.Fry;
+using Domain.FryShake;
+using Domain.Shake;
 
 public class ComboFuture :
     Future<OrderCombo, ComboCompleted>

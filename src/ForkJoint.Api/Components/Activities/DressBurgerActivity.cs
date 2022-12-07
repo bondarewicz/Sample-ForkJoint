@@ -4,8 +4,8 @@ using System;
 using System.Threading.Tasks;
 using MassTransit;
 using Microsoft.Extensions.Logging;
-using Contracts.Burger;
-using Contracts.OnionRings;
+using Domain.Burger;
+using Domain.OnionRings;
 
 
 public class DressBurgerActivity :

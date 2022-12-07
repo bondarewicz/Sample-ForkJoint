@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForkJoint.Api", "src\ForkJoint.Api\ForkJoint.Api.csproj", "{FC7D2524-21ED-43D1-A130-5FF30F701D9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForkJoint.Contracts", "src\ForkJoint.Contracts\ForkJoint.Contracts.csproj", "{DFBC9B26-B14B-4CC3-B57A-BDC6F9DCFB11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForkJoint.Domain", "src\ForkJoint.Domain\ForkJoint.Domain.csproj", "{DFBC9B26-B14B-4CC3-B57A-BDC6F9DCFB11}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForkJoint.Tests", "tests\ForkJoint.Tests\ForkJoint.Tests.csproj", "{85451494-70F7-4F2E-85B3-36F7AA0EC7F0}"
 EndProject

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Contracts.Burger;
+using Domain.Burger;
 
 public class Grill :
     IGrill

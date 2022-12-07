@@ -1,9 +1,9 @@
 namespace ForkJoint.Api.Components.Futures;
 
 using MassTransit;
-using Contracts.Fry;
-using Contracts.FryShake;
-using Contracts.Shake;
+using Domain.Fry;
+using Domain.FryShake;
+using Domain.Shake;
 
 public class FryShakeFuture :
     Future<OrderFryShake, FryShakeCompleted>

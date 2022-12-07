@@ -2,10 +2,10 @@ namespace ForkJoint.Api.Models;
 
 using System;
 using System.ComponentModel.DataAnnotations;
-using Contracts.Burger;
-using Contracts.Fry;
-using Contracts.FryShake;
-using Contracts.Shake;
+using Domain.Burger;
+using Domain.Fry;
+using Domain.FryShake;
+using Domain.Shake;
 
 
 public class Order

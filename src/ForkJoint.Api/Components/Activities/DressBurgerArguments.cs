@@ -1,7 +1,7 @@
 namespace ForkJoint.Api.Components.Activities;
 
 using System;
-using Contracts.Burger;
+using Domain.Burger;
 
 
 public interface DressBurgerArguments

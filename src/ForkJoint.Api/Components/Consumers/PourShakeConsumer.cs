@@ -3,7 +3,7 @@ namespace ForkJoint.Api.Components.Consumers;
 using System.Threading.Tasks;
 using MassTransit;
 using Services.ShakeMachine;
-using Contracts.Shake;
+using Domain.Shake;
 
 public class PourShakeConsumer :
     IConsumer<PourShake>

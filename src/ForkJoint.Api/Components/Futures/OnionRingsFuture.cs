@@ -1,7 +1,7 @@
 namespace ForkJoint.Api.Components.Futures;
 
 using MassTransit;
-using Contracts.OnionRings;
+using Domain.OnionRings;
 
 public class OnionRingsFuture :
     Future<OrderOnionRings, OnionRingsCompleted>

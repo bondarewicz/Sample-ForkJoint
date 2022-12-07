@@ -6,8 +6,8 @@ using MassTransit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using Contracts.Future;
-using Contracts.Order;
+using Domain.Future;
+using Domain.Order;
 
 [ApiController]
 [Route("[controller]")]

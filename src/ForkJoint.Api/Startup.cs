@@ -1,7 +1,7 @@
 using ForkJoint.Api.Services.Fryer;
 using ForkJoint.Api.Services.Grill;
 using ForkJoint.Api.Services.ShakeMachine;
-using ForkJoint.Contracts.Burger;
+using ForkJoint.Domain.Burger;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;
 
@@ -17,7 +17,7 @@ using Components.Activities;
 using Components.Consumers;
 using Components.Futures;
 using Components.ItineraryPlanners;
-using Contracts;
+using Domain;
 using OpenTelemetry;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;

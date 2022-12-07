@@ -1,7 +1,7 @@
 namespace ForkJoint.Api.Components.Futures;
 
 using MassTransit;
-using Contracts.Shake;
+using Domain.Shake;
 
 public class ShakeFuture :
     Future<OrderShake, ShakeCompleted>
