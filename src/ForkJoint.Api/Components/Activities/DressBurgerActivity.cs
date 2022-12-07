@@ -25,8 +25,8 @@ namespace ForkJoint.Api.Components.Activities
             if (patty == null)
                 throw new ArgumentNullException(nameof(arguments.Patty));
 
-            _logger.LogDebug("Dressing Burger: {OrderId} {Ketchup} {Lettuce}", arguments.OrderId, arguments.Ketchup,
-                arguments.Lettuce);
+            _logger.LogDebug("Dressing Burger: OrderId: {OrderId} Ketchup:{Ketchup} Lettuce: {Lettuce}, Cheese: {Cheese}", arguments.OrderId, arguments.Ketchup,
+                arguments.Lettuce, patty.Cheese);
 
             if (arguments.Lettuce)
                 throw new InvalidOperationException("No lettuce available");
