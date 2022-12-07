@@ -1,3 +1,10 @@
+using ForkJoint.Contracts.Burger;
+using ForkJoint.Contracts.Fry;
+using ForkJoint.Contracts.FryShake;
+using ForkJoint.Contracts.Order;
+using ForkJoint.Contracts.OrderLine;
+using ForkJoint.Contracts.Shake;
+
 namespace ForkJoint.Api.Components.Futures;
 
 using System;

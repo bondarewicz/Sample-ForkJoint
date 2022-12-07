@@ -1,3 +1,8 @@
+using ForkJoint.Contracts.Burger;
+using ForkJoint.Contracts.FryShake;
+using ForkJoint.Contracts.Order;
+using ForkJoint.Contracts.Shake;
+
 namespace ForkJoint.Tests;
 
 using System.Threading.Tasks;

@@ -1,3 +1,5 @@
+using ForkJoint.Contracts.Shake;
+
 namespace ForkJoint.Tests;
 
 using System;

@@ -1,3 +1,5 @@
+using ForkJoint.Contracts.Shake;
+
 namespace ForkJoint.Api.Components.Futures;
 
 using Contracts;

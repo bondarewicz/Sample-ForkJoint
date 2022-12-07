@@ -1,3 +1,5 @@
+using ForkJoint.Contracts.Burger;
+
 namespace ForkJoint.Tests;
 
 using System.Threading.Tasks;

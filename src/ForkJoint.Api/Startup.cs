@@ -1,3 +1,4 @@
+using ForkJoint.Contracts.Burger;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;
 

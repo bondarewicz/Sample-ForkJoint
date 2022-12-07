@@ -1,3 +1,5 @@
+using ForkJoint.Contracts.OnionRings;
+
 namespace ForkJoint.Api.Components.Consumers;
 
 using System.Threading.Tasks;

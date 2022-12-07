@@ -1,3 +1,5 @@
+using ForkJoint.Contracts.Fry;
+
 namespace ForkJoint.Api.Components.Consumers;
 
 using System.Threading.Tasks;

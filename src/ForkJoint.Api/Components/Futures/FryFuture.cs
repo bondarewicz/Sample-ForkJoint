@@ -1,3 +1,5 @@
+using ForkJoint.Contracts.Fry;
+
 namespace ForkJoint.Api.Components.Futures;
 
 using Contracts;

@@ -1,4 +1,7 @@
-﻿namespace ForkJoint.Api.Controllers;
+﻿using ForkJoint.Contracts.Future;
+using ForkJoint.Contracts.Order;
+
+namespace ForkJoint.Api.Controllers;
 
 using System.Linq;
 using System.Threading.Tasks;

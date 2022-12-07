@@ -1,3 +1,5 @@
+using ForkJoint.Contracts.Burger;
+
 namespace ForkJoint.Api.Components.Activities;
 
 using System;

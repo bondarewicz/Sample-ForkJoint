@@ -1,3 +1,7 @@
+using ForkJoint.Contracts.Fry;
+using ForkJoint.Contracts.FryShake;
+using ForkJoint.Contracts.Shake;
+
 namespace ForkJoint.Api.Components.Futures;
 
 using System.Linq;

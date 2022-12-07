@@ -1,3 +1,5 @@
+using ForkJoint.Contracts.FryShake;
+
 namespace ForkJoint.Tests;
 
 using System;

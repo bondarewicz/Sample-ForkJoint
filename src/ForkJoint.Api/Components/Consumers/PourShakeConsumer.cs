@@ -1,3 +1,5 @@
+using ForkJoint.Contracts.Shake;
+
 namespace ForkJoint.Api.Components.Consumers;
 
 using System.Threading.Tasks;
