@@ -1,16 +1,13 @@
-﻿using ForkJoint.Contracts.Future;
-using ForkJoint.Contracts.Order;
-
-namespace ForkJoint.Api.Controllers;
+﻿namespace ForkJoint.Api.Controllers;
 
 using System.Linq;
 using System.Threading.Tasks;
-using Contracts;
 using MassTransit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-
+using Contracts.Future;
+using Contracts.Order;
 
 [ApiController]
 [Route("[controller]")]

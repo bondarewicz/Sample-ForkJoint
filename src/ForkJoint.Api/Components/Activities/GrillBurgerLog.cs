@@ -1,9 +1,6 @@
-using ForkJoint.Contracts.Burger;
-
 namespace ForkJoint.Api.Components.Activities;
 
-using Contracts;
-
+using Contracts.Burger;
 
 public interface GrillBurgerLog
 {

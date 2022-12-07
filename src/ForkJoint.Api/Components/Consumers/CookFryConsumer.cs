@@ -1,12 +1,9 @@
-using ForkJoint.Contracts.Fry;
-
 namespace ForkJoint.Api.Components.Consumers;
 
+using Services.Fryer;
+using Contracts.Fry;
 using System.Threading.Tasks;
-using Contracts;
 using MassTransit;
-using Services;
-
 
 public class CookFryConsumer :
     IConsumer<CookFry>

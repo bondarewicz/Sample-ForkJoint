@@ -1,14 +1,11 @@
-using ForkJoint.Contracts.Burger;
-using ForkJoint.Contracts.OnionRings;
-
 namespace ForkJoint.Api.Components.ItineraryPlanners;
 
 using System;
 using System.Threading.Tasks;
 using Activities;
-using Contracts;
 using MassTransit;
-
+using Contracts.Burger;
+using Contracts.OnionRings;
 
 public class BurgerItineraryPlanner :
     IItineraryPlanner<OrderBurger>

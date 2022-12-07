@@ -1,10 +1,7 @@
+using System.Threading.Tasks;
 using ForkJoint.Contracts.Burger;
 
-namespace ForkJoint.Api.Services;
-
-using System.Threading.Tasks;
-using Contracts;
-
+namespace ForkJoint.Api.Services.Grill;
 
 public interface IGrill
 {

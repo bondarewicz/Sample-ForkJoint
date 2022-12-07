@@ -3,7 +3,7 @@ namespace ForkJoint.Api.Components.Activities;
 using System.Threading.Tasks;
 using MassTransit;
 using Microsoft.Extensions.Logging;
-using Services;
+using Services.Grill;
 
 
 public class GrillBurgerActivity :

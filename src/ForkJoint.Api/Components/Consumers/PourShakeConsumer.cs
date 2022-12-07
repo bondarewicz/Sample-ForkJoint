@@ -1,12 +1,9 @@
-using ForkJoint.Contracts.Shake;
-
 namespace ForkJoint.Api.Components.Consumers;
 
 using System.Threading.Tasks;
-using Contracts;
 using MassTransit;
-using Services;
-
+using Services.ShakeMachine;
+using Contracts.Shake;
 
 public class PourShakeConsumer :
     IConsumer<PourShake>

@@ -1,8 +1,7 @@
-namespace ForkJoint.Api.Services;
+namespace ForkJoint.Api.Services.ShakeMachine;
 
 using System.Threading.Tasks;
 using Contracts;
-
 
 public interface IShakeMachine
 {

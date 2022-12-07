@@ -1,10 +1,7 @@
-using ForkJoint.Contracts.Fry;
-
 namespace ForkJoint.Api.Components.Futures;
 
-using Contracts;
 using MassTransit;
-
+using Contracts.Fry;
 
 public class FryFuture :
     Future<OrderFry, FryCompleted>

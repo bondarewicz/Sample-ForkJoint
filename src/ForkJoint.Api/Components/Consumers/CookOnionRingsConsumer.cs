@@ -1,12 +1,9 @@
-using ForkJoint.Contracts.OnionRings;
-
 namespace ForkJoint.Api.Components.Consumers;
 
 using System.Threading.Tasks;
-using Contracts;
 using MassTransit;
-using Services;
-
+using Services.Fryer;
+using Contracts.OnionRings;
 
 public class CookOnionRingsConsumer :
     IConsumer<CookOnionRings>

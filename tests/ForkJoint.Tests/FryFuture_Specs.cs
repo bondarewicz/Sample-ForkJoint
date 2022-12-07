@@ -1,3 +1,4 @@
+using ForkJoint.Api.Services.Fryer;
 using ForkJoint.Contracts.Fry;
 
 namespace ForkJoint.Tests;

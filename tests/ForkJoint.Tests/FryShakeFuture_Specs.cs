@@ -1,3 +1,5 @@
+using ForkJoint.Api.Services.Fryer;
+using ForkJoint.Api.Services.ShakeMachine;
 using ForkJoint.Contracts.FryShake;
 
 namespace ForkJoint.Tests;

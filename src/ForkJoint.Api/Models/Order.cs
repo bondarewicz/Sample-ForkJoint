@@ -1,13 +1,11 @@
-using ForkJoint.Contracts.Burger;
-using ForkJoint.Contracts.Fry;
-using ForkJoint.Contracts.FryShake;
-using ForkJoint.Contracts.Shake;
-
 namespace ForkJoint.Api.Models;
 
 using System;
 using System.ComponentModel.DataAnnotations;
-using Contracts;
+using Contracts.Burger;
+using Contracts.Fry;
+using Contracts.FryShake;
+using Contracts.Shake;
 
 
 public class Order

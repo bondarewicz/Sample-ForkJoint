@@ -1,10 +1,7 @@
-using ForkJoint.Contracts.Burger;
-
 namespace ForkJoint.Api.Components.Futures;
 
-using Contracts;
 using MassTransit;
-
+using Contracts.Burger;
 
 public class BurgerFuture :
     Future<OrderBurger, BurgerCompleted>

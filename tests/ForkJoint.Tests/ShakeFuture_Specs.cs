@@ -1,3 +1,4 @@
+using ForkJoint.Api.Services.ShakeMachine;
 using ForkJoint.Contracts.Shake;
 
 namespace ForkJoint.Tests;

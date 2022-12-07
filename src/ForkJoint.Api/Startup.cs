@@ -1,3 +1,6 @@
+using ForkJoint.Api.Services.Fryer;
+using ForkJoint.Api.Services.Grill;
+using ForkJoint.Api.Services.ShakeMachine;
 using ForkJoint.Contracts.Burger;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;

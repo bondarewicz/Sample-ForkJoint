@@ -1,13 +1,10 @@
-using ForkJoint.Contracts.Burger;
-
-namespace ForkJoint.Api.Services;
+namespace ForkJoint.Api.Services.Grill;
 
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Contracts;
 using Microsoft.Extensions.Logging;
-
+using Contracts.Burger;
 
 public class Grill :
     IGrill

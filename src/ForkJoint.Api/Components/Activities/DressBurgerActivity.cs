@@ -1,13 +1,11 @@
-using ForkJoint.Contracts.Burger;
-using ForkJoint.Contracts.OnionRings;
-
 namespace ForkJoint.Api.Components.Activities;
 
 using System;
 using System.Threading.Tasks;
-using Contracts;
 using MassTransit;
 using Microsoft.Extensions.Logging;
+using Contracts.Burger;
+using Contracts.OnionRings;
 
 
 public class DressBurgerActivity :

@@ -1,8 +1,7 @@
-namespace ForkJoint.Api.Services;
+namespace ForkJoint.Api.Services.Fryer;
 
 using System.Threading.Tasks;
 using Contracts;
-
 
 public interface IFryer
 {
