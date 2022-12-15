@@ -1,7 +1,9 @@
 using ForkJoint.Api.Services.Fryer;
 using ForkJoint.Api.Services.Grill;
 using ForkJoint.Api.Services.ShakeMachine;
+using ForkJoint.Api.Services.ZplGenerator;
 using ForkJoint.Domain.Burger;
+using ForkJoint.Domain.Leg;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;
 
@@ -63,6 +65,10 @@ public class Startup
         services.TryAddSingleton<IFryer, Fryer>();
         services.TryAddSingleton<IShakeMachine, ShakeMachine>();
 
+        
+        services.TryAddScoped<IItineraryPlanner<OrderLeg>, ShipmentItineraryPlanner>();
+        services.TryAddSingleton<IGenerateZpl, ZplGenerator>();
+        
         services.AddApplicationInsightsTelemetry(options =>
         {
             options.EnableDependencyTrackingTelemetryModule = true;
@@ -166,8 +172,10 @@ public class Startup
             x.AddConsumersFromNamespaceContaining<CookOnionRingsConsumer>();
 
             x.AddActivitiesFromNamespaceContaining<GrillBurgerActivity>();
+            x.AddActivitiesFromNamespaceContaining<GenerateLabelZplActivity>();
 
             x.AddFuturesFromNamespaceContaining<OrderFuture>();
+            x.AddFuturesFromNamespaceContaining<ShipmentFuture>();
 
             x.AddSagaRepository<FutureState>()
                 .EntityFrameworkRepository(r =>

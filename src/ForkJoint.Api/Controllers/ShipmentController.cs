@@ -1,4 +1,4 @@
-﻿using ForkJoint.Domain.Shipment;
+﻿using Microsoft.Extensions.Logging;
 
 namespace ForkJoint.Api.Controllers;
 
@@ -17,10 +17,12 @@ public class ShipmentController :
     ControllerBase
 {
     private readonly IRequestClient<ProcessShipment> _client;
+    readonly ILogger<ShipmentController> _logger;
 
-    public ShipmentController(IRequestClient<ProcessShipment> client)
+    public ShipmentController(IRequestClient<ProcessShipment> client, ILogger<ShipmentController> logger)
     {
         _client = client;
+        _logger = logger;
     }
 
     /// <summary>
@@ -38,13 +40,14 @@ public class ShipmentController :
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Post(Shipment shipment)
     {
+        _logger.LogDebug("Got ShipmentId {0}", shipment.ShipmentId);
+        
         try
         {
             Response response = await _client.GetResponse<ProcessShipmentCompleted, ProcessShipmentFaulted>(new
             {
                 shipment.ShipmentId,
-                shipment.Labels,
-                shipment.Invoices
+                shipment.Legs
             });
 
             return response switch
@@ -86,7 +89,7 @@ public class ShipmentController :
             return Accepted(new
             {
                 shipment.ShipmentId,
-                Accepted = shipment.Labels.Select(x => x.LabelId).ToArray()
+                Accepted = shipment.Legs.Select(x => x.LegId).ToArray()
             });
         }
     }

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace ForkJoint.Domain.Shipment;
 
-public interface ProcessShipment
+public interface ProcessShipment : ShipmentLine.ShipmentLine
 {
     Guid ShipmentId { get; }
-    IEnumerable<Label.Label> Labels { get; }
-    IEnumerable<Invoice.Invoice> Invoices { get; }
+    IEnumerable<Leg.Leg> Legs { get; }
 }
