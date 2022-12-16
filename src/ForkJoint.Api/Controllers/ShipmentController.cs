@@ -57,6 +57,10 @@ public class ShipmentController :
                     completed.ShipmentId,
                     completed.Created,
                     completed.Completed,
+                    Labels = completed.Labels.ToDictionary(x => x.Key, x => new
+                    {
+                        Zpl = x.Value.Leg.LabelData
+                    }),
                     LinesCompleted = completed.LinesCompleted.ToDictionary(x => x.Key, x => new
                     {
                         x.Value.Created,

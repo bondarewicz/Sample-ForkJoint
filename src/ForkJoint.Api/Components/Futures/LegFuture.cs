@@ -1,4 +1,3 @@
-using ForkJoint.Api.Components.Activities;
 using ForkJoint.Domain.Leg;
 
 namespace ForkJoint.Api.Components.Futures;
@@ -6,7 +5,7 @@ namespace ForkJoint.Api.Components.Futures;
 using MassTransit;
 
 public class LegFuture :
-    Future<OrderLeg, LegCompleted>
+    Future<CreateLegLabel, LegLabelCompleted>
 {
     public LegFuture()
     {
@@ -16,7 +15,7 @@ public class LegFuture :
             .OnRoutingSlipCompleted(r => r
                 .SetCompletedUsingInitializer(context =>
                 {
-                    var leg = context.GetVariable<Leg>(nameof(LegCompleted.Leg));
+                    var leg = context.GetVariable<Leg>(nameof(LegLabelCompleted.Leg));
 
                     return new
                     {

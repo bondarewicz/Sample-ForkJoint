@@ -3,7 +3,7 @@ using ForkJoint.Api.Components.Activities;
 
 namespace ForkJoint.Api.Services.ZplGenerator;
 
-public interface IGenerateZpl
+public interface IGenerateLabels
 {
     Task<ZplLabel> Generate(string data);
     void Add(ZplLabel zpl);

@@ -1,4 +1,6 @@
+using System;
 using ForkJoint.Domain.Leg;
+using ForkJoint.Domain.Receipt;
 using ForkJoint.Domain.Shipment;
 using ForkJoint.Domain.ShipmentLine;
 
@@ -14,39 +16,36 @@ public class ShipmentFuture :
     {
         ConfigureCommand(x => x.CorrelateById(context => context.Message.ShipmentId));
 
-        SendRequests<Leg, OrderLeg>(x => x.Legs, x =>
+        SendRequests<Leg, CreateLegLabel>(x => x.Legs, x =>
             {
                 x.UsingRequestInitializer(MapOrderLeg);
                 x.TrackPendingRequest(message => message.ShipmentLineId);
             })
-            .OnResponseReceived<LegCompleted>(x => x.CompletePendingRequest(message => message.ShipmentLineId));
-
-        
-        // SendRequests<Fry, OrderFry>(x => x.Fries, x =>
-        //     {
-        //         x.UsingRequestInitializer(MapOrderFry);
-        //         x.TrackPendingRequest(message => message.OrderLineId);
-        //     })
-        //     .OnResponseReceived<FryCompleted>(x => x.CompletePendingRequest(message => message.OrderLineId));
-        //
-        // SendRequests<Shake, OrderShake>(x => x.Shakes, x =>
-        //     {
-        //         x.UsingRequestInitializer(MapOrderShake);
-        //         x.TrackPendingRequest(message => message.OrderLineId);
-        //     })
-        //     .OnResponseReceived<ShakeCompleted>(x => x.CompletePendingRequest(message => message.OrderLineId));
-        //
-        // SendRequests<FryShake, OrderFryShake>(x => x.FryShakes, x =>
-        //     {
-        //         x.UsingRequestInitializer(MapOrderFryShake);
-        //         x.TrackPendingRequest(message => message.OrderLineId);
-        //     })
-        //     .OnResponseReceived<FryShakeCompleted>(x => x.CompletePendingRequest(message => message.OrderLineId));
+            .OnResponseReceived<LegLabelCompleted>(x => x.CompletePendingRequest(message => message.ShipmentLineId));
 
 
-        WhenAllCompleted(r => r.SetCompletedUsingInitializer(context => new
+        WhenAllCompleted(r => r.SetCompletedUsingInitializer(context => 
         {
-            LinesCompleted = context.Saga.Results.Select(x => context.ToObject<ShipmentLineCompleted>(x.Value)).ToDictionary(x => x.ShipmentLineId),
+            var shipmentId = context.Saga.CorrelationId;
+            var labels = context.Saga.Results.Select(x => context.ToObject<LegLabelCompleted>(x.Value))
+                .ToDictionary(x => x.Leg?.LegId);
+            //
+            // context.Publish<CreateReceipt>(new
+            // {
+            //     ShipmentId = shipmentId,
+            //     ShipmentLineId = Guid.NewGuid(),
+            //     ReceiptData = "adsd",
+            //     Quantity = 1
+            // });
+
+            
+            
+            return new
+            {
+                LinesCompleted = context.Saga.Results.Select(x => context.ToObject<ShipmentLineCompleted>(x.Value))
+                    .ToDictionary(x => x.ShipmentLineId),
+                Labels = labels
+            };
         }));
 
         WhenAnyFaulted(f => f.SetFaultedUsingInitializer(MapShipmentFaulted));

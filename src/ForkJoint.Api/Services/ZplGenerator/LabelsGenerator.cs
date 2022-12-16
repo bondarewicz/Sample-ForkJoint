@@ -7,12 +7,12 @@ using Microsoft.Extensions.Logging;
 
 namespace ForkJoint.Api.Services.ZplGenerator;
 
-public class ZplGenerator : IGenerateZpl
+public class LabelsGenerator : IGenerateLabels
 {
-    readonly ILogger<ZplGenerator> _logger;
+    readonly ILogger<LabelsGenerator> _logger;
     readonly HashSet<ZplLabel> _zpls;
     
-    public ZplGenerator(ILogger<ZplGenerator> logger)
+    public LabelsGenerator(ILogger<LabelsGenerator> logger)
     {
         _logger = logger;
         _zpls = new HashSet<ZplLabel>();

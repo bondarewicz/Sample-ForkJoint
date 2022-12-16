@@ -1,6 +1,6 @@
 namespace ForkJoint.Api.Components.Activities;
 
-public interface GenerateLabelZplLog
+public interface GenerateLabelLog
 {
     ZplLabel ZplLabel { get; }
 }

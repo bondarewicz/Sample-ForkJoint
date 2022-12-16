@@ -1,11 +1,4 @@
-using ForkJoint.Api.Services.Fryer;
-using ForkJoint.Api.Services.Grill;
-using ForkJoint.Api.Services.ShakeMachine;
-using ForkJoint.Api.Services.ZplGenerator;
-using ForkJoint.Domain.Burger;
-using ForkJoint.Domain.Leg;
-using OpenTelemetry.Exporter;
-using OpenTelemetry.Metrics;
+using ForkJoint.Domain.Receipt;
 
 namespace ForkJoint.Api;
 
@@ -41,7 +34,15 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Serilog;
-using Services;
+using ForkJoint.Api.Services.Fryer;
+using ForkJoint.Api.Services.Grill;
+using ForkJoint.Api.Services.ReceiptGenerator;
+using ForkJoint.Api.Services.ShakeMachine;
+using ForkJoint.Api.Services.ZplGenerator;
+using ForkJoint.Domain.Burger;
+using ForkJoint.Domain.Leg;
+using OpenTelemetry.Exporter;
+using OpenTelemetry.Metrics;
 
 
 public class Startup
@@ -66,8 +67,11 @@ public class Startup
         services.TryAddSingleton<IShakeMachine, ShakeMachine>();
 
         
-        services.TryAddScoped<IItineraryPlanner<OrderLeg>, ShipmentItineraryPlanner>();
-        services.TryAddSingleton<IGenerateZpl, ZplGenerator>();
+        services.TryAddScoped<IItineraryPlanner<CreateLegLabel>, LabelsItineraryPlanner>();
+        services.TryAddSingleton<IGenerateLabels, LabelsGenerator>();
+        services.TryAddSingleton<IGenerateReceipt, ReceiptGenerator>();
+        
+        services.TryAddScoped<IItineraryPlanner<CreateReceipt>, ReceiptItineraryPlanner>();
         
         services.AddApplicationInsightsTelemetry(options =>
         {
@@ -170,12 +174,27 @@ public class Startup
             });
 
             x.AddConsumersFromNamespaceContaining<CookOnionRingsConsumer>();
+            
+            // todo comment out
+            x.AddConsumersFromNamespaceContaining<RoutingSlipConsumer>();
 
+            
+            
+            // x.AddConsumer<RoutingSlipConsumer>();
+            //
+            // x.UsingInMemory((context, cfg) =>
+            // {
+            //     cfg.ConfigureEndpoints(context);
+            // });
+            
             x.AddActivitiesFromNamespaceContaining<GrillBurgerActivity>();
-            x.AddActivitiesFromNamespaceContaining<GenerateLabelZplActivity>();
+            x.AddActivitiesFromNamespaceContaining<GenerateLabelActivity>();
+            x.AddActivitiesFromNamespaceContaining<GenerateReceiptActivity>();
 
             x.AddFuturesFromNamespaceContaining<OrderFuture>();
             x.AddFuturesFromNamespaceContaining<ShipmentFuture>();
+            x.AddFuturesFromNamespaceContaining<LegFuture>();
+            x.AddFuturesFromNamespaceContaining<ReceiptFuture>();
 
             x.AddSagaRepository<FutureState>()
                 .EntityFrameworkRepository(r =>

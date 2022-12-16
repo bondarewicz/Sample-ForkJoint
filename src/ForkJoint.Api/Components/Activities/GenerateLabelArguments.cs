@@ -2,7 +2,7 @@ using System;
 
 namespace ForkJoint.Api.Components.Activities;
 
-public interface GenerateLabelZplArguments
+public interface GenerateLabelArguments
 {
     Guid ShipmentId { get; }
     string LegData { get; }
