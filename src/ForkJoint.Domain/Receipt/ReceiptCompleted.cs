@@ -4,5 +4,5 @@ namespace ForkJoint.Domain.Receipt;
 
 public interface ReceiptCompleted : ShipmentLineCompleted
 {
-    int Quantity { get; }
+    string Receipt { get;  }
 }

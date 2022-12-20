@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using ForkJoint.Domain.Receipt;
+using Microsoft.Extensions.Logging;
 
 namespace ForkJoint.Api.Controllers;
 
@@ -16,13 +17,19 @@ using Domain.Shipment;
 public class ShipmentController :
     ControllerBase
 {
-    private readonly IRequestClient<ProcessShipment> _client;
+    private readonly IRequestClient<ProcessShipment> _labelsClient;
+    private readonly IRequestClient<CreateReceipt> _receiptClient;
     readonly ILogger<ShipmentController> _logger;
 
-    public ShipmentController(IRequestClient<ProcessShipment> client, ILogger<ShipmentController> logger)
+    public ShipmentController(
+        IRequestClient<ProcessShipment> labelsClient, 
+        IRequestClient<CreateReceipt> receiptClient,
+        ILogger<ShipmentController> logger)
     {
-        _client = client;
+        _labelsClient = labelsClient;
+        _receiptClient = receiptClient;
         _logger = logger;
+        
     }
 
     /// <summary>
@@ -44,49 +51,100 @@ public class ShipmentController :
         
         try
         {
-            Response response = await _client.GetResponse<ProcessShipmentCompleted, ProcessShipmentFaulted>(new
+            var response = await _labelsClient.GetResponse<ProcessShipmentCompleted, ProcessShipmentFaulted>(new
             {
                 shipment.ShipmentId,
                 shipment.Legs
             });
+            
+            
+            // var response2 = await _receiptClient.GetResponse<ReceiptCompleted, ReceiptFaulted>(new
+            // {
+            //     shipment.ShipmentId,
+            //     Quantity = 1
+            // });
 
-            return response switch
+            
+            if (response.Is(out Response<ProcessShipmentFaulted> faulted))
             {
-                (_, ProcessShipmentCompleted completed) => Ok(new
+                // var id = faulted.Message.ShipmentId
+                return BadRequest(new
                 {
-                    completed.ShipmentId,
-                    completed.Created,
-                    completed.Completed,
-                    Labels = completed.Labels.ToDictionary(x => x.Key, x => new
-                    {
-                        Zpl = x.Value.Leg.LabelData
-                    }),
-                    LinesCompleted = completed.LinesCompleted.ToDictionary(x => x.Key, x => new
-                    {
-                        x.Value.Created,
-                        x.Value.Completed,
-                        x.Value.Description,
-                    })
-                }),
-                (_, ProcessShipmentFaulted faulted) => BadRequest(new
-                {
-                    faulted.ShipmentId,
-                    faulted.Created,
-                    faulted.Faulted,
-                    LinesCompleted = faulted.LinesCompleted.ToDictionary(x => x.Key, x => new
+                    faulted.Message.ShipmentId,
+                    faulted.Message.Created,
+                    faulted.Message.Faulted,
+                    LinesCompleted = faulted.Message.LinesCompleted.ToDictionary(x => x.Key, x => new
                     {
                         x.Value.Created,
                         x.Value.Completed,
                         x.Value.Description,
                     }),
-                    LinesFaulted = faulted.LinesFaulted.ToDictionary(x => x.Key, x => new
+                    LinesFaulted = faulted.Message.LinesFaulted.ToDictionary(x => x.Key, x => new
                     {
                         Faulted = x.Value.Timestamp,
                         Reason = x.Value.GetExceptionMessages(),
                     })
-                }),
-                _ => BadRequest()
-            };
+                });
+            }
+
+            if (response.Is(out Response<ProcessShipmentCompleted> completed))
+            {
+                return Ok(new
+                {
+                    completed.Message.ShipmentId,
+                    completed.Message.Created,
+                    completed.Message.Completed,
+                    // Labels = completed.Message.Labels.ToDictionary(x => x.Key, x => new
+                    // {
+                    //     Zpl = x.Value.Leg.LabelData
+                    // }),
+                    LinesCompleted = completed.Message.LinesCompleted.ToDictionary(x => x.Key, x => new
+                    {
+                        x.Value.Created,
+                        x.Value.Completed,
+                        x.Value.Description,
+                    })
+                });
+            }
+            
+            return BadRequest();
+
+            // response switch
+            // {
+            //     (_, ProcessShipmentCompleted completed) => Ok(new
+            //         {
+            //             completed.ShipmentId,
+            //             completed.Created,
+            //             completed.Completed,
+            //             Labels = completed.Labels.ToDictionary(x => x.Key, x => new
+            //             {
+            //                 Zpl = x.Value.Leg.LabelData
+            //             }),
+            //             LinesCompleted = completed.LinesCompleted.ToDictionary(x => x.Key, x => new
+            //             {
+            //                 x.Value.Created,
+            //                 x.Value.Completed,
+            //                 x.Value.Description,
+            //             })
+            //         })
+            //     (_, ProcessShipmentFaulted faulted) => BadRequest(new
+            //     {
+            //         faulted.ShipmentId,
+            //         faulted.Created,
+            //         faulted.Faulted,
+            //         LinesCompleted = faulted.LinesCompleted.ToDictionary(x => x.Key, x => new
+            //         {
+            //             x.Value.Created,
+            //             x.Value.Completed,
+            //             x.Value.Description,
+            //         }),
+            //         LinesFaulted = faulted.LinesFaulted.ToDictionary(x => x.Key, x => new
+            //         {
+            //             Faulted = x.Value.Timestamp,
+            //             Reason = x.Value.GetExceptionMessages(),
+            //         })
+            //     }),
+            //     _ => BadRequest()
         }
         catch (RequestTimeoutException)
         {

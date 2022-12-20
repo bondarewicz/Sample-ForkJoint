@@ -14,24 +14,21 @@ public class ReceiptGenerator : IGenerateReceipt
         _logger = logger;
     }
 
-    public async Task<ZplReceipt> Generate(string data)
+    public async Task<ZplReceipt> Generate(int quantity)
     {
-        _logger.LogDebug("Generating Receipt for {data}", data);
+        _logger.LogDebug($"Generating Receipt x {quantity}");
         
         await Task.Delay(2000);
 
-        var zpl = RandomString(5);
+        var zpl = Base64Encode(Guid.NewGuid().ToString());
         return new ZplReceipt
         {
-            Data = $"{data}-{zpl}"
+            Data = $"{zpl}"
         };
     }
     
-    private static string RandomString(int length)
-    {
-        var random = new Random();
-        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        return new string(Enumerable.Repeat(chars, length)
-            .Select(s => s[random.Next(s.Length)]).ToArray());
+    public static string Base64Encode(string plainText) {
+        var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+        return Convert.ToBase64String(plainTextBytes);
     }
 }

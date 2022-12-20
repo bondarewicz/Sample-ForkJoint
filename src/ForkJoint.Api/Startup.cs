@@ -1,5 +1,3 @@
-using ForkJoint.Domain.Receipt;
-
 namespace ForkJoint.Api;
 
 using System;
@@ -12,7 +10,6 @@ using Components.Activities;
 using Components.Consumers;
 using Components.Futures;
 using Components.ItineraryPlanners;
-using Domain;
 using OpenTelemetry;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -34,12 +31,8 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Serilog;
-using ForkJoint.Api.Services.Fryer;
-using ForkJoint.Api.Services.Grill;
 using ForkJoint.Api.Services.ReceiptGenerator;
-using ForkJoint.Api.Services.ShakeMachine;
 using ForkJoint.Api.Services.ZplGenerator;
-using ForkJoint.Domain.Burger;
 using ForkJoint.Domain.Leg;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;
@@ -61,17 +54,11 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.TryAddScoped<IItineraryPlanner<OrderBurger>, BurgerItineraryPlanner>();
-        services.TryAddSingleton<IGrill, Grill>();
-        services.TryAddSingleton<IFryer, Fryer>();
-        services.TryAddSingleton<IShakeMachine, ShakeMachine>();
-
         
-        services.TryAddScoped<IItineraryPlanner<CreateLegLabel>, LabelsItineraryPlanner>();
+        services.TryAddScoped<IItineraryPlanner<RequestLabelGeneration>, LabelsItineraryPlanner>();
         services.TryAddSingleton<IGenerateLabels, LabelsGenerator>();
-        services.TryAddSingleton<IGenerateReceipt, ReceiptGenerator>();
         
-        services.TryAddScoped<IItineraryPlanner<CreateReceipt>, ReceiptItineraryPlanner>();
+        services.TryAddSingleton<IGenerateReceipt, ReceiptGenerator>();
         
         services.AddApplicationInsightsTelemetry(options =>
         {
@@ -173,28 +160,26 @@ public class Startup
                 r.ExistingDbContext<ForkJointSagaDbContext>();
             });
 
-            x.AddConsumersFromNamespaceContaining<CookOnionRingsConsumer>();
-            
             // todo comment out
             x.AddConsumersFromNamespaceContaining<RoutingSlipConsumer>();
+            x.AddConsumersFromNamespaceContaining<CreateReceiptConsumer>();
 
             
             
-            // x.AddConsumer<RoutingSlipConsumer>();
+            x.AddConsumer<RoutingSlipConsumer>();
             //
             // x.UsingInMemory((context, cfg) =>
             // {
             //     cfg.ConfigureEndpoints(context);
             // });
             
-            x.AddActivitiesFromNamespaceContaining<GrillBurgerActivity>();
+            
             x.AddActivitiesFromNamespaceContaining<GenerateLabelActivity>();
-            x.AddActivitiesFromNamespaceContaining<GenerateReceiptActivity>();
-
-            x.AddFuturesFromNamespaceContaining<OrderFuture>();
+            // x.AddActivitiesFromNamespaceContaining<GenerateReceiptActivity>();
+            
             x.AddFuturesFromNamespaceContaining<ShipmentFuture>();
             x.AddFuturesFromNamespaceContaining<LegFuture>();
-            x.AddFuturesFromNamespaceContaining<ReceiptFuture>();
+            // x.AddFuturesFromNamespaceContaining<ReceiptFuture>();
 
             x.AddSagaRepository<FutureState>()
                 .EntityFrameworkRepository(r =>

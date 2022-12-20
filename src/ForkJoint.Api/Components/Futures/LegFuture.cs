@@ -5,7 +5,7 @@ namespace ForkJoint.Api.Components.Futures;
 using MassTransit;
 
 public class LegFuture :
-    Future<CreateLegLabel, LegLabelCompleted>
+    Future<RequestLabelGeneration, LegLabelCompleted>
 {
     public LegFuture()
     {

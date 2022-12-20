@@ -16,7 +16,7 @@ public record Leg
     {
         StringBuilder sb = new();
 
-        sb.AppendFormat("Leg LabelData: {0}", LabelData);
+        sb.AppendFormat("Label: {0}", LabelData);
 
         if (Labels)
             sb.Append(" Labels");

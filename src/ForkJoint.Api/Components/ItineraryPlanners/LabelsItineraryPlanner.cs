@@ -9,7 +9,7 @@ using MassTransit;
 using ForkJoint.Domain.Leg;
 
 public class LabelsItineraryPlanner :
-    IItineraryPlanner<CreateLegLabel>
+    IItineraryPlanner<RequestLabelGeneration>
 {
     private readonly Uri _labelAddress;
 
@@ -18,12 +18,12 @@ public class LabelsItineraryPlanner :
         _labelAddress = new Uri($"exchange:{formatter.ExecuteActivity<GenerateLabelActivity, GenerateLabelArguments>()}");
     }
 
-    public async Task PlanItinerary(BehaviorContext<FutureState, CreateLegLabel> context, IItineraryBuilder builder)
+    public async Task PlanItinerary(BehaviorContext<FutureState, RequestLabelGeneration> context, IItineraryBuilder builder)
     {
         var createLegLabel = context.Message;
 
-        builder.AddVariable(nameof(CreateLegLabel.ShipmentId), createLegLabel.ShipmentId);
-        builder.AddVariable(nameof(CreateLegLabel.ShipmentLineId), createLegLabel.ShipmentLineId);
+        builder.AddVariable(nameof(RequestLabelGeneration.ShipmentId), createLegLabel.ShipmentId);
+        builder.AddVariable(nameof(RequestLabelGeneration.ShipmentLineId), createLegLabel.ShipmentLineId);
 
         var leg = createLegLabel.Leg;
 
@@ -32,13 +32,20 @@ public class LabelsItineraryPlanner :
         {
             builder.AddActivity(nameof(GenerateLabelActivity), _labelAddress, new
             {
-                leg.Labels,
-                leg.Invoice,
-                leg.Receipt,
+                // leg.Labels,
+                // leg.Invoice,
+                // leg.Receipt,
                 leg.LegData
             });    
+            
+            //todo 
+            // builder.AddActivity(nameof(ConvertLabelActivity), _labelAddress, new
+            // {
+            //     leg.Labels,
+            //     leg.Invoice,
+            //     leg.Receipt,
+            //     leg.LegData
+            // });   
         }
-        
-        // builder.AddSubscription(new Uri("rabbitmq://localhost/log-events"), RoutingSlipEvents.All);
     }
 }
