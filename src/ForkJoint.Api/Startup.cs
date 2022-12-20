@@ -1,4 +1,5 @@
 using ForkJoint.Api.Services.InvoiceGenerator;
+using ForkJoint.Api.Services.LabelsConverter;
 
 namespace ForkJoint.Api;
 
@@ -62,6 +63,7 @@ public class Startup
         
         services.TryAddSingleton<IGenerateReceipt, ReceiptGenerator>();
         services.TryAddSingleton<IGenerateInvoice, InvoiceGenerator>();
+        services.TryAddSingleton<IConvertLabels, LabelsConverter>();
         
         services.AddApplicationInsightsTelemetry(options =>
         {
@@ -179,6 +181,7 @@ public class Startup
             
             
             x.AddActivitiesFromNamespaceContaining<GenerateLabelActivity>();
+            x.AddActivitiesFromNamespaceContaining<ConvertLabelActivity>();
             // x.AddActivitiesFromNamespaceContaining<GenerateReceiptActivity>();
             
             x.AddFuturesFromNamespaceContaining<ShipmentFuture>();

@@ -28,10 +28,12 @@ public class GenerateLabelActivity :
         {
             LegId = Guid.NewGuid(),
             LegData = context.Arguments.LegData,
-            LabelData = zpl.Data
+            ZplData = zpl.Data
         };
         
-        return context.CompletedWithVariables<GenerateLabelLog>(new {leg}, new {leg});
+        // @see https://masstransit-project.com/advanced/courier/builder.html#activity-arguments
+        return context.CompletedWithVariables<GenerateLabelLog>(new {leg}, new {leg, ZplData = zpl.Data});
+        // return context.CompletedWithVariables<GenerateLabelLog>(new {ZplLabel = zpl}, new {ZplLabel = zpl});
     }
 
     public Task<CompensationResult> Compensate(CompensateContext<GenerateLabelLog> context)
