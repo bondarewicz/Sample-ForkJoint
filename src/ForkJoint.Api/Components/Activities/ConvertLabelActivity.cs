@@ -21,11 +21,9 @@ public class ConvertLabelActivity :
     
     public async Task<ExecutionResult> Execute(ExecuteContext<ConvertLabelArguments> context)
     {
-        var arguments = context.Arguments;
-
-        var label = arguments.ZplData;
+        var zpl = context.GetVariable<string>("ZplData");
         
-        var pdf = await _converter.Convert(label);
+        var pdf = await _converter.Convert(zpl);
         
         var leg = new Leg
         {

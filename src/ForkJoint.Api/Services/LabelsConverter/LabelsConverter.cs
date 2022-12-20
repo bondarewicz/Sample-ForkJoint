@@ -15,7 +15,7 @@ public class LabelsConverter : IConvertLabels
 
     public async Task<PdfLabel> Convert(string data)
     {
-        _logger.LogDebug("Converting ZPL to PDF {data}", data);
+        _logger.LogDebug($"Converting ZPL {data} to PDF");
         
         await Task.Delay(5000);
 
