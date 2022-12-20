@@ -3,10 +3,10 @@ using MassTransit;
 
 namespace ForkJoint.Api.Components.Futures;
 
-public class InvoiceFuture : 
+public class InvoicePolicy : 
     Future<RequestInvoiceGeneration, InvoiceCompleted>
 {
-    public InvoiceFuture()
+    public InvoicePolicy()
     {
         ConfigureCommand(x => x.CorrelateById(context => context.Message.ShipmentLineId));
         

@@ -56,15 +56,8 @@ public class ShipmentController :
                 shipment.ShipmentId,
                 shipment.Legs
             });
-            
-            
-            // var response2 = await _receiptClient.GetResponse<ReceiptCompleted, ReceiptFaulted>(new
-            // {
-            //     shipment.ShipmentId,
-            //     Quantity = 1
-            // });
 
-            
+
             if (response.Is(out Response<ProcessShipmentFaulted> faulted))
             {
                 // var id = faulted.Message.ShipmentId

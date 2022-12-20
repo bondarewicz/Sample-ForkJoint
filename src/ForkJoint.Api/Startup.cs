@@ -58,7 +58,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         
-        services.TryAddScoped<IItineraryPlanner<RequestLabelGeneration>, LabelsItineraryPlanner>();
+        services.TryAddScoped<IItineraryPlanner<RequestLabelGeneration>, LabelsRoutingSlip>();
         services.TryAddSingleton<IGenerateLabels, LabelsGenerator>();
         
         services.TryAddSingleton<IGenerateReceipt, ReceiptGenerator>();
@@ -184,8 +184,8 @@ public class Startup
             x.AddActivitiesFromNamespaceContaining<ConvertLabelActivity>();
             // x.AddActivitiesFromNamespaceContaining<GenerateReceiptActivity>();
             
-            x.AddFuturesFromNamespaceContaining<ShipmentFuture>();
-            x.AddFuturesFromNamespaceContaining<LegFuture>();
+            x.AddFuturesFromNamespaceContaining<ProcessShipmentPolicy>();
+            x.AddFuturesFromNamespaceContaining<LegPolicy>();
             // x.AddFuturesFromNamespaceContaining<ReceiptFuture>();
 
             x.AddSagaRepository<FutureState>()

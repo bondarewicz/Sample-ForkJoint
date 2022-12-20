@@ -3,10 +3,10 @@ namespace ForkJoint.Api.Components.Futures;
 using MassTransit;
 using ForkJoint.Domain.Receipt;
 
-public class ReceiptFuture :
+public class ReceiptPolicy :
     Future<RequestReceiptGeneration, ReceiptCompleted>
 {
-    public ReceiptFuture()
+    public ReceiptPolicy()
     {
         ConfigureCommand(x => x.CorrelateById(context => context.Message.ShipmentLineId));
         

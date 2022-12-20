@@ -1,5 +1,3 @@
-using MassTransit.Courier.Contracts;
-
 namespace ForkJoint.Api.Components.ItineraryPlanners;
 
 using System;
@@ -8,13 +6,13 @@ using Activities;
 using MassTransit;
 using ForkJoint.Domain.Leg;
 
-public class LabelsItineraryPlanner :
+public class LabelsRoutingSlip :
     IItineraryPlanner<RequestLabelGeneration>
 {
     private readonly Uri _labelAddress;
     private readonly Uri _conversionAddress;
 
-    public LabelsItineraryPlanner(IEndpointNameFormatter formatter)
+    public LabelsRoutingSlip(IEndpointNameFormatter formatter)
     {
         _labelAddress = new Uri($"exchange:{formatter.ExecuteActivity<GenerateLabelActivity, GenerateLabelArguments>()}");
         _conversionAddress = new Uri($"exchange:{formatter.ExecuteActivity<ConvertLabelActivity, ConvertLabelArguments>()}");
@@ -38,13 +36,11 @@ public class LabelsItineraryPlanner :
                 leg.ZplData
             });    
             
-            // builder.AddVariable(nameof(leg.ZplData), leg.ZplData);
-            //todo 
             builder.AddActivity(nameof(ConvertLabelActivity), _conversionAddress, new
             {
-                LegData = leg.LegData,
-                ZplData = leg.ZplData,
-                PdfData = leg.PdfData
+                leg.LegData,
+                leg.ZplData,
+                leg.PdfData
             });   
         }
     }

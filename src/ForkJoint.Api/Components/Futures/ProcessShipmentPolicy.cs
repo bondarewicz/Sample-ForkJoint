@@ -10,17 +10,17 @@ using ForkJoint.Domain.Receipt;
 using ForkJoint.Domain.Shipment;
 using ForkJoint.Domain.ShipmentLine;
 
-public class ShipmentFuture :
+public class ProcessShipmentPolicy :
     Future<ProcessShipment, ProcessShipmentCompleted, ProcessShipmentFaulted>
 {
-    public ShipmentFuture()
+    public ProcessShipmentPolicy()
     {
         ConfigureCommand(x => x.CorrelateById(context => context.Message.ShipmentId));
 
         
         SendRequests<Leg, RequestLabelGeneration>(x => x.Legs, x =>
             {
-                x.UsingRequestInitializer(MapCreateLeg);
+                x.UsingRequestInitializer(MapRequestLabelGeneration);
                 x.TrackPendingRequest(message => message.ShipmentLineId);
             })
             .OnResponseReceived<LegLabelCompleted>(x => x.CompletePendingRequest(message => message.ShipmentLineId));
@@ -77,7 +77,7 @@ public class ShipmentFuture :
         WhenAnyFaulted(f => f.SetFaultedUsingInitializer(MapShipmentFaulted));
     }
 
-    static object MapCreateLeg(BehaviorContext<FutureState, Leg> context)
+    static object MapRequestLabelGeneration(BehaviorContext<FutureState, Leg> context)
     {
         return new
         {

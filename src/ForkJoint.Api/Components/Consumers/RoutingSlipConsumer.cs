@@ -13,6 +13,7 @@ public class RoutingSlipConsumer :
 {
     readonly ILogger<RoutingSlipConsumer> _logger;
     
+    //todo unable to observe below transition events, probably missing startup setup
     public RoutingSlipConsumer(ILogger<RoutingSlipConsumer> logger)
     {
         _logger = logger;

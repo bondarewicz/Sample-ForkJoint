@@ -4,10 +4,10 @@ namespace ForkJoint.Api.Components.Futures;
 
 using MassTransit;
 
-public class LegFuture :
+public class LegPolicy :
     Future<RequestLabelGeneration, LegLabelCompleted>
 {
-    public LegFuture()
+    public LegPolicy()
     {
         ConfigureCommand(x => x.CorrelateById(context => context.Message.ShipmentLineId));
 
