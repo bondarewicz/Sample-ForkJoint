@@ -1,3 +1,5 @@
+using ForkJoint.Domain.Leg;
+
 namespace ForkJoint.Api.Components.Activities;
 
 public interface GenerateLabelLog

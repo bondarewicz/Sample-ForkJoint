@@ -1,4 +1,5 @@
 using System;
+using ForkJoint.Domain.Leg;
 
 namespace ForkJoint.Api.Components.Activities;
 

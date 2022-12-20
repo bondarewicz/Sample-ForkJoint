@@ -32,8 +32,7 @@ public class GenerateLabelActivity :
         };
         
         // @see https://masstransit-project.com/advanced/courier/builder.html#activity-arguments
-        return context.CompletedWithVariables<GenerateLabelLog>(new {leg}, new {leg, ZplData = zpl.Data});
-        // return context.CompletedWithVariables<GenerateLabelLog>(new {ZplLabel = zpl}, new {ZplLabel = zpl});
+        return context.CompletedWithVariables<GenerateLabelLog>(new {ZplData = leg.ZplData, leg}, new {ZplData = leg.ZplData, leg});
     }
 
     public Task<CompensationResult> Compensate(CompensateContext<GenerateLabelLog> context)

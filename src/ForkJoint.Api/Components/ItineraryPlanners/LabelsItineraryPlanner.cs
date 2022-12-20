@@ -38,7 +38,7 @@ public class LabelsItineraryPlanner :
                 leg.ZplData
             });    
             
-            builder.AddVariable(nameof(leg.ZplData), leg.ZplData);
+            // builder.AddVariable(nameof(leg.ZplData), leg.ZplData);
             //todo 
             builder.AddActivity(nameof(ConvertLabelActivity), _conversionAddress, new
             {
