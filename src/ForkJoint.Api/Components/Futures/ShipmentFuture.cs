@@ -1,4 +1,5 @@
 using System;
+using ForkJoint.Domain.Invoice;
 
 namespace ForkJoint.Api.Components.Futures;
 
@@ -36,6 +37,22 @@ public class ShipmentFuture :
                 x.TrackPendingRequest(message => message.ShipmentLineId);
             })
             .OnResponseReceived<ReceiptCompleted>(x =>
+            {
+                x.CompletePendingRequest(message => message.ShipmentLineId);
+            });
+        
+        SendRequest<RequestInvoiceGeneration>(x =>
+            {
+                x.UsingRequestInitializer(context => new
+                {
+                    ShipmentId = context.Saga.CorrelationId,
+                    ShipmentLineId = Guid.NewGuid(),
+                    Quantity = 5
+                });
+        
+                x.TrackPendingRequest(message => message.ShipmentLineId);
+            })
+            .OnResponseReceived<InvoiceCompleted>(x =>
             {
                 x.CompletePendingRequest(message => message.ShipmentLineId);
             });

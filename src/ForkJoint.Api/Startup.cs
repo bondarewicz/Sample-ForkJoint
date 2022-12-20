@@ -1,3 +1,5 @@
+using ForkJoint.Api.Services.InvoiceGenerator;
+
 namespace ForkJoint.Api;
 
 using System;
@@ -59,6 +61,7 @@ public class Startup
         services.TryAddSingleton<IGenerateLabels, LabelsGenerator>();
         
         services.TryAddSingleton<IGenerateReceipt, ReceiptGenerator>();
+        services.TryAddSingleton<IGenerateInvoice, InvoiceGenerator>();
         
         services.AddApplicationInsightsTelemetry(options =>
         {
@@ -163,6 +166,7 @@ public class Startup
             // todo comment out
             x.AddConsumersFromNamespaceContaining<RoutingSlipConsumer>();
             x.AddConsumersFromNamespaceContaining<CreateReceiptConsumer>();
+            x.AddConsumersFromNamespaceContaining<CreateInvoiceConsumer>();
 
             
             

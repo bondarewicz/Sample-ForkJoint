@@ -32,9 +32,6 @@ public class LabelsItineraryPlanner :
         {
             builder.AddActivity(nameof(GenerateLabelActivity), _labelAddress, new
             {
-                // leg.Labels,
-                // leg.Invoice,
-                // leg.Receipt,
                 leg.LegData
             });    
             

@@ -28,10 +28,7 @@ public class GenerateLabelActivity :
         {
             LegId = Guid.NewGuid(),
             LegData = context.Arguments.LegData,
-            LabelData = zpl.Data,
-            Invoice = context.Arguments.Invoice,
-            Labels = context.Arguments.Labels,
-            Receipt = context.Arguments.Receipt
+            LabelData = zpl.Data
         };
         
         return context.CompletedWithVariables<GenerateLabelLog>(new {leg}, new {leg});
