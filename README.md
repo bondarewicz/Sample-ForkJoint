@@ -49,120 +49,33 @@ You may need to modify the `docker-compose.api.yml` file to match your path for 
 
 ### Request Response
 
-![Request Response](https://raw.githubusercontent.com/MassTransit/Sample-ForkJoint/master/assets/requestResponse.svg "Request Response")
+<!-- ![Request Response](https://raw.githubusercontent.com/MassTransit/Sample-ForkJoint/master/assets/requestResponse.svg "Request Response") -->
 
 ### Routing Slip
 
-![Routing Slip](https://raw.githubusercontent.com/MassTransit/Sample-ForkJoint/master/assets/routingSlip.svg "Routing Slip")
+<!-- ![Routing Slip](https://raw.githubusercontent.com/MassTransit/Sample-ForkJoint/master/assets/routingSlip.svg "Routing Slip") -->
 
-### Example SubmitOrder Post
+### Example ProcessShipment Post
 ```
-POST https://localhost:5001/Order
+POST https://localhost:5001/Shipment
 Content-Type: application/json
 
 {
-  "orderId": "{{$guid}}",
-  "burgers": [
+  "shipmentId": "{{$guid}}",
+  "legs": [
     {
-      "burgerId": "{{$guid}}",
-      "weight": 0.25,
-      "lettuce": false,
-      "cheese": false,
-      "pickle": false,
-      "onion": false,
-      "ketchup": false,
-      "mustard": false,
-      "barbecueSauce": true,
-      "onionRing": true
+      "legId": "{{$guid}}",
+      "legData": "leg-data-1",
+      "labels": true,
+      "invoice": true,
+      "receipt": true
     },
     {
-      "burgerId": "{{$guid}}",
-      "weight": 0.25,
-      "lettuce": false,
-      "cheese": true,
-      "pickle": false,
-      "onion": false,
-      "ketchup": false,
-      "mustard": true,
-      "barbecueSauce": false,
-      "onionRing": true
-    }
-  ],
-  "fries": [
-    {
-      "fryId": "{{$guid}}",
-      "size": 1
-    },
-    {
-      "fryId": "{{$guid}}",
-      "size": 2
-    }
-  ],
-  "shakes": [
-    {
-      "shakeId": "{{$guid}}",
-      "flavor": "Strawberry",
-      "size": 1
-    }
-  ],
-  "fryShakes": [
-    {
-      "fryShakeId": "{{$guid}}",
-      "flavor": "Banana",
-      "size": 1
-    }
-  ]
-}
-```
-
-### Example SubmitOrder Failure Post
-```
-POST https://localhost:5001/Order
-Content-Type: application/json
-
-{
-  "orderId": "{{$guid}}",
-  "burgers": [
-    {
-      "burgerId": "{{$guid}}",
-      "weight": 0.25,
-      "lettuce": false,
-      "cheese": false,
-      "pickle": false,
-      "onion": false,
-      "ketchup": false,
-      "mustard": false,
-      "barbecueSauce": true,
-      "onionRing": true
-    },
-    {
-      "burgerId": "{{$guid}}",
-      "weight": 0.25,
-      "lettuce": true,
-      "cheese": true,
-      "pickle": false,
-      "onion": false,
-      "ketchup": false,
-      "mustard": true,
-      "barbecueSauce": false,
-      "onionRing": true
-    }
-  ],
-  "fries": [
-    {
-      "fryId": "{{$guid}}",
-      "size": 1
-    },
-    {
-      "fryId": "{{$guid}}",
-      "size": 2
-    }
-  ],
-  "shakes": [
-    {
-      "shakeId": "{{$guid}}",
-      "flavor": "Strawberry",
-      "size": 1
+      "legId": "{{$guid}}",
+      "legData": "leg-data-2",
+      "labels": true,
+      "invoice": false,
+      "receipt": true
     }
   ]
 }
